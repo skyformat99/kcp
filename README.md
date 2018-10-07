@@ -1,12 +1,15 @@
 KCP - A Fast and Reliable ARQ Protocol
 ======================================
-[![Powered][2]][1] [![Build Status][4]][5] 
+
+[![Powered][2]][1] [![Build Status][4]][5]
+
 [1]: https://github.com/skywind3000/kcp
 [2]: http://skywind3000.github.io/word/images/kcp.svg
 [3]: https://raw.githubusercontent.com/skywind3000/kcp/master/kcp.svg
 [4]: https://api.travis-ci.org/skywind3000/kcp.svg?branch=master
 [5]: https://travis-ci.org/skywind3000/kcp
 
+[README in English](https://github.com/skywind3000/kcp/blob/master/README.en.md) 
 
 # 简介
 
@@ -99,7 +102,7 @@ TCP是为流量设计的（每秒内可以传输多少KB的数据），讲究的
    - interval ：协议内部工作的 interval，单位毫秒，比如 10ms或者 20ms
    - resend ：快速重传模式，默认0关闭，可以设置2（2次ACK跨越将会直接重传）
    - nc ：是否关闭流控，默认是0代表不关闭，1代表关闭。
-   - 普通模式：`ikcp_nodelay(kcp, 0, 40, 0, 0);
+   - 普通模式： ikcp_nodelay(kcp, 0, 40, 0, 0);
    - 极速模式： ikcp_nodelay(kcp, 1, 10, 2, 1);
 
 2. 最大窗口：
@@ -132,20 +135,38 @@ TCP是为流量设计的（每秒内可以传输多少KB的数据），讲究的
 - [性能评测](https://github.com/skywind3000/kcp/wiki/KCP-Benchmark)
 
 
-# 相关应用
+# 开源案例
 
 - [kcptun](https://github.com/xtaci/kcptun): 基于 kcp-go做的高速远程端口转发(隧道) ，配合ssh -D，可以比 shadowsocks 更流畅的看在线视频。
 - [dog-tunnel](https://github.com/vzex/dog-tunnel): GO开发的网络隧道，使用 KCP极大的改进了传输速度，并移植了一份 GO版本 KCP
 - [v2ray](https://www.v2ray.com)：著名代理软件，Shadowsocks 代替者，1.17后集成了 kcp协议，使用UDP传输，无数据包特征。
 - [asio-kcp](https://github.com/libinzhangyuan/asio_kcp): 使用 KCP的完整 UDP网络库，完整实现了基于 UDP的链接状态管理，会话控制，KCP协议调度等
 - [kcp-java](https://github.com/hkspirt/kcp-java)：Java版本 KCP协议实现。
+- [kcp-netty](https://github.com/szhnet/kcp-netty)：kcp的Java语言实现，基于netty。
 - [kcp-go](https://github.com/xtaci/kcp-go): 高安全性的kcp的 GO语言实现，包含 UDP会话管理的简单实现，可以作为后续开发的基础库。 
 - [kcp-csharp](https://github.com/limpo1989/kcp-csharp): kcp的 csharp移植，同时包含一份回话管理，可以连接上面kcp-go的服务端。
 - [kcp-rs](https://github.com/en/kcp-rs): KCP的 rust移植
+- [kcp-rust](https://github.com/Matrix-Zhang/kcp)：新版本 KCP的 rust 移植
+- [tokio-kcp](https://github.com/Matrix-Zhang/tokio_kcp)：rust tokio 的 kcp 集成
 - [lua-kcp](https://github.com/linxiaolong/lua-kcp): KCP的 Lua扩展，用于 Lua服务器
 - [node-kcp](https://github.com/leenjewel/node-kcp): node-js 的 KCP 接口  
+- [nysocks](https://github.com/oyyd/nysocks): 基于libuv实现的[node-addon](https://nodejs.org/api/addons.html)，提供nodejs版本的代理服务，客户端接入支持SOCKS5和ss两种协议
 - [shadowsocks-android](https://github.com/shadowsocks/shadowsocks-android): Shadowsocks for android 集成了 kcptun 使用 kcp协议加速 shadowsocks，效果不错
-- [kcpuv](https://github.com/elisaday/kcpuv): 使用 libuv开发的kcpuv库，目前还在 Demo阶段。
+- [kcpuv](https://github.com/elisaday/kcpuv): 使用 libuv开发的kcpuv库，目前还在 Demo阶段
+- [Lantern](https://getlantern.org/)：更好的 VPN，Github 50000 星，使用 kcpgo 加速
+- [rpcx](https://github.com/smallnest/rpcx) ：RPC 框架，1000+ 星，使用 kcpgo 加速 RPC
+- [xkcptun](https://github.com/liudf0716/xkcptun): c语言实现的kcptun，主要用于[OpenWrt](https://github.com/openwrt/openwrt), [LEDE](https://github.com/lede-project/source)开发的路由器项目上
+- [et-frame](https://github.com/egametang/ET): C#前后端框架(前端unity3d)，统一用C#开发游戏，实现了前后端kcp协议
+
+# 商业案例
+
+- [明日帝国](https://www.taptap.com/app/50664)：Game K17 的 《明日帝国》 （Google Play），使用 KCP 加速游戏消息，让全球玩家流畅联网
+- [仙灵大作战](https://www.taptap.com/app/27242)：4399 的 MOBA游戏，使用 KCP 优化游戏同步
+- [CC](http://cc.163.com/)：网易 CC 使用 kcp 加速视频推流，有效提高流畅性
+- [BOBO](http://bobo.163.com/)：网易 BOBO 使用 kcp 加速主播推流
+- [云帆加速](http://www.yfcloud.com/)：使用 KCP 加速文件传输和视频推流，优化了台湾主播推流的流畅度
+
+欢迎告知更多案例
 
 # 协议比较
 
@@ -179,6 +200,7 @@ TCP是为流量设计的（每秒内可以传输多少KB的数据），讲究的
 欢迎关注
 
 KCP交流群：364933586（QQ群号），KCP集成，调优，网络传输以及相关技术讨论
+QQ群已满千人，目前无法再加，请加 gitter 群：https://gitter.im/skywind3000/KCP
 
 blog: http://www.skywind.me
 
